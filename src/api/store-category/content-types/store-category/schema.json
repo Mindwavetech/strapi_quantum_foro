@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "store_categories",
+  "info": {
+    "singularName": "store-category",
+    "pluralName": "store-categories",
+    "displayName": "StoreCategory"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "string"
+    },
+    "store": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::store.store",
+      "inversedBy": "store_categories"
+    }
+  }
+}

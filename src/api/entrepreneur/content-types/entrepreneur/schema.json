@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "entrepreneurs",
+  "info": {
+    "singularName": "entrepreneur",
+    "pluralName": "entrepreneurs",
+    "displayName": "Entrepreneur"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "Description": {
+      "type": "string"
+    },
+    "businessType": {
+      "type": "string"
+    },
+    "stores": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::store.store"
+    }
+  }
+}

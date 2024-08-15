@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "stores",
+  "info": {
+    "singularName": "store",
+    "pluralName": "stores",
+    "displayName": "Store",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "Url": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "string"
+    },
+    "Location": {
+      "type": "string"
+    },
+    "coverageArea": {
+      "type": "string"
+    },
+    "store_categories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::store-category.store-category",
+      "mappedBy": "store"
+    },
+    "entrepreneur": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::entrepreneur.entrepreneur"
+    },
+    "imgUrl": {
+      "type": "string"
+    },
+    "backgroundColor": {
+      "type": "string"
+    }
+  }
+}
