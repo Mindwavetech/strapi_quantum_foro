@@ -11,6 +11,7 @@ module.exports = [
       'http://localhost:1337',
       'http://localhost:1336',
       'http://localhost:3000',
+      'https://quantumforo.vercel.app'
       ],
       contentSecurityPolicy: {
         useDefaults: true,
