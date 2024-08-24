@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "countries",
+  "info": {
+    "singularName": "country",
+    "pluralName": "countries",
+    "displayName": "Countries",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "code": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "required": true,
+      "default": "name",
+      "unique": true
+    },
+    "callingCodes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::calling-code.calling-code"
+    },
+    "maintenanceMode": {
+      "type": "boolean",
+      "default": false
+    },
+    "linkChat": {
+      "type": "text"
+    },
+    "languages": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::language.language"
+    },
+    "currencies": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::currency.currency"
+    },
+    "icon": {
+      "type": "string"
+    }
+  }
+}

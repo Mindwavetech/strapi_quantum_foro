@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "menu_navbars",
+  "info": {
+    "singularName": "menu-navbar",
+    "pluralName": "menu-navbars",
+    "displayName": "Menu-navbar"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "menu": {
+      "type": "dynamiczone",
+      "components": [
+        "menu.link",
+        "menu.dropdown"
+      ]
+    },
+    "country": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::country.country"
+    }
+  }
+}

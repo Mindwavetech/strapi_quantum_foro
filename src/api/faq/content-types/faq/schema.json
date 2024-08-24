@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "faqs",
+  "info": {
+    "singularName": "faq",
+    "pluralName": "faqs",
+    "displayName": "FAQ",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "content": {
+      "type": "richtext"
+    },
+    "country": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::country.country"
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "Apuestas Deportivas",
+        "Reglas de Futbol",
+        "Reglas de Baloncesto",
+        "Reglas Esport"
+      ]
+    }
+  }
+}

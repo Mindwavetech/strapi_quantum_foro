@@ -695,7 +695,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     username: Attribute.String &
@@ -723,6 +722,17 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'plugin::users-permissions.user',
       'manyToOne',
       'plugin::users-permissions.role'
+    >;
+    first_name: Attribute.String;
+    last_name: Attribute.String;
+    identificationNumber: Attribute.String;
+    phone: Attribute.String;
+    city: Attribute.String;
+    state: Attribute.String;
+    country: Attribute.String;
+    birthdate: Attribute.String;
+    typeUser: Attribute.Enumeration<
+      ['Normal', 'Entrepreneur', 'Author', 'EntrepreneurAuthor']
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -788,18 +798,306 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiAuthorAuthor extends Schema.CollectionType {
+  collectionName: 'authors';
+  info: {
+    singularName: 'author';
+    pluralName: 'authors';
+    displayName: 'Author';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    active: Attribute.Boolean;
+    displayName: Attribute.String;
+    avatar: Attribute.String;
+    href: Attribute.String;
+    jobName: Attribute.String;
+    user: Attribute.Relation<
+      'api::author.author',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::author.author',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::author.author',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiBannerBanner extends Schema.CollectionType {
+  collectionName: 'banners';
+  info: {
+    singularName: 'banner';
+    pluralName: 'banners';
+    displayName: 'Banner';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    text: Attribute.String;
+    delay: Attribute.Integer;
+    active: Attribute.Boolean;
+    order: Attribute.Integer;
+    Page: Attribute.Enumeration<['Home']>;
+    desktopImage: Attribute.String;
+    mobileImage: Attribute.String;
+    country: Attribute.Relation<
+      'api::banner.banner',
+      'oneToOne',
+      'api::country.country'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::banner.banner',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::banner.banner',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCallingCodeCallingCode extends Schema.CollectionType {
+  collectionName: 'calling_codes';
+  info: {
+    singularName: 'calling-code';
+    pluralName: 'calling-codes';
+    displayName: 'CallingCode';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    code: Attribute.String & Attribute.Required;
+    icon: Attribute.Media<'images', true> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::calling-code.calling-code',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::calling-code.calling-code',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCategorieCategorie extends Schema.CollectionType {
+  collectionName: 'categories';
+  info: {
+    singularName: 'categorie';
+    pluralName: 'categories';
+    displayName: 'Categories';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    active: Attribute.Boolean;
+    country: Attribute.Relation<
+      'api::categorie.categorie',
+      'oneToOne',
+      'api::country.country'
+    >;
+    thumbnail: Attribute.String;
+    count: Attribute.Integer;
+    href: Attribute.String;
+    color: Attribute.String;
+    order: Attribute.Integer;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::categorie.categorie',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::categorie.categorie',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiConditionCondition extends Schema.CollectionType {
+  collectionName: 'conditions';
+  info: {
+    singularName: 'condition';
+    pluralName: 'conditions';
+    displayName: 'Conditions';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    subtitle: Attribute.String;
+    content: Attribute.RichText;
+    order: Attribute.Integer;
+    showInFooter: Attribute.Boolean;
+    category: Attribute.String;
+    country: Attribute.Relation<
+      'api::condition.condition',
+      'oneToOne',
+      'api::country.country'
+    >;
+    conditionsImage: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::condition.condition',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::condition.condition',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCountryCountry extends Schema.CollectionType {
+  collectionName: 'countries';
+  info: {
+    singularName: 'country';
+    pluralName: 'countries';
+    displayName: 'Countries';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    code: Attribute.String;
+    name: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.DefaultTo<'name'>;
+    callingCodes: Attribute.Relation<
+      'api::country.country',
+      'oneToMany',
+      'api::calling-code.calling-code'
+    >;
+    maintenanceMode: Attribute.Boolean & Attribute.DefaultTo<false>;
+    linkChat: Attribute.Text;
+    languages: Attribute.Relation<
+      'api::country.country',
+      'oneToMany',
+      'api::language.language'
+    >;
+    currencies: Attribute.Relation<
+      'api::country.country',
+      'oneToMany',
+      'api::currency.currency'
+    >;
+    icon: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::country.country',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::country.country',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCurrencyCurrency extends Schema.CollectionType {
+  collectionName: 'currencies';
+  info: {
+    singularName: 'currency';
+    pluralName: 'currencies';
+    displayName: 'Currency';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    code: Attribute.String & Attribute.Required;
+    currencyText: Attribute.String & Attribute.Required;
+    decimal: Attribute.Integer;
+    symbol: Attribute.String & Attribute.Required;
+    thousandSeparator: Attribute.String;
+    decimalSeparator: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::currency.currency',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::currency.currency',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiEntrepreneurEntrepreneur extends Schema.CollectionType {
   collectionName: 'entrepreneurs';
   info: {
     singularName: 'entrepreneur';
     pluralName: 'entrepreneurs';
     displayName: 'Entrepreneur';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    users_permissions_user: Attribute.Relation<
+    user: Attribute.Relation<
       'api::entrepreneur.entrepreneur',
       'oneToOne',
       'plugin::users-permissions.user'
@@ -822,6 +1120,234 @@ export interface ApiEntrepreneurEntrepreneur extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::entrepreneur.entrepreneur',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiFaqFaq extends Schema.CollectionType {
+  collectionName: 'faqs';
+  info: {
+    singularName: 'faq';
+    pluralName: 'faqs';
+    displayName: 'FAQ';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    content: Attribute.RichText;
+    country: Attribute.Relation<
+      'api::faq.faq',
+      'oneToOne',
+      'api::country.country'
+    >;
+    category: Attribute.Enumeration<
+      [
+        'Apuestas Deportivas',
+        'Reglas de Futbol',
+        'Reglas de Baloncesto',
+        'Reglas Esport'
+      ]
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::faq.faq', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::faq.faq', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiLanguageLanguage extends Schema.CollectionType {
+  collectionName: 'languages';
+  info: {
+    singularName: 'language';
+    pluralName: 'languages';
+    displayName: 'Language';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    code: Attribute.String & Attribute.Required;
+    languageText: Attribute.String;
+    icon: Attribute.Media<'images', true> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::language.language',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::language.language',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiMenuFooterMenuFooter extends Schema.CollectionType {
+  collectionName: 'menu_footers';
+  info: {
+    singularName: 'menu-footer';
+    pluralName: 'menu-footers';
+    displayName: 'Menu-footer';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    section: Attribute.Component<'menu-footer.section-footer'>;
+    country: Attribute.Relation<
+      'api::menu-footer.menu-footer',
+      'oneToOne',
+      'api::country.country'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::menu-footer.menu-footer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::menu-footer.menu-footer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiMenuNavbarMenuNavbar extends Schema.CollectionType {
+  collectionName: 'menu_navbars';
+  info: {
+    singularName: 'menu-navbar';
+    pluralName: 'menu-navbars';
+    displayName: 'Menu-navbar';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    menu: Attribute.DynamicZone<['menu.link', 'menu.dropdown']>;
+    country: Attribute.Relation<
+      'api::menu-navbar.menu-navbar',
+      'oneToOne',
+      'api::country.country'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::menu-navbar.menu-navbar',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::menu-navbar.menu-navbar',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiNoteNote extends Schema.CollectionType {
+  collectionName: 'notes';
+  info: {
+    singularName: 'note';
+    pluralName: 'notes';
+    displayName: 'Notes';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    featuredImage: Attribute.String;
+    desc: Attribute.String;
+    author: Attribute.Relation<
+      'api::note.note',
+      'oneToOne',
+      'api::author.author'
+    >;
+    country: Attribute.Relation<
+      'api::note.note',
+      'oneToOne',
+      'api::country.country'
+    >;
+    category: Attribute.Relation<
+      'api::note.note',
+      'oneToOne',
+      'api::categorie.categorie'
+    >;
+    content: Attribute.RichText;
+    active: Attribute.Boolean;
+    order: Attribute.Integer;
+    href: Attribute.String & Attribute.Required & Attribute.Unique;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::note.note', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::note.note', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPromotionPromotion extends Schema.CollectionType {
+  collectionName: 'promotions';
+  info: {
+    singularName: 'promotion';
+    pluralName: 'promotions';
+    displayName: 'Promotions';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    subtitle: Attribute.String & Attribute.Required;
+    content: Attribute.RichText;
+    category: Attribute.String;
+    recommendedInHome: Attribute.Boolean;
+    showInFooter: Attribute.Boolean & Attribute.DefaultTo<false>;
+    order: Attribute.Integer;
+    highlightPromotion: Attribute.Boolean;
+    country: Attribute.Relation<
+      'api::promotion.promotion',
+      'oneToOne',
+      'api::country.country'
+    >;
+    promotionImage: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::promotion.promotion',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::promotion.promotion',
       'oneToOne',
       'admin::user'
     > &
@@ -863,6 +1389,45 @@ export interface ApiReviewReview extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::review.review',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSocialMediaSocialMedia extends Schema.CollectionType {
+  collectionName: 'social_medias';
+  info: {
+    singularName: 'social-media';
+    pluralName: 'social-medias';
+    displayName: 'SocialMedia';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    order: Attribute.Integer;
+    icon: Attribute.String;
+    href: Attribute.String;
+    country: Attribute.Relation<
+      'api::social-media.social-media',
+      'oneToOne',
+      'api::country.country'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::social-media.social-media',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::social-media.social-media',
       'oneToOne',
       'admin::user'
     > &
@@ -971,8 +1536,22 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::author.author': ApiAuthorAuthor;
+      'api::banner.banner': ApiBannerBanner;
+      'api::calling-code.calling-code': ApiCallingCodeCallingCode;
+      'api::categorie.categorie': ApiCategorieCategorie;
+      'api::condition.condition': ApiConditionCondition;
+      'api::country.country': ApiCountryCountry;
+      'api::currency.currency': ApiCurrencyCurrency;
       'api::entrepreneur.entrepreneur': ApiEntrepreneurEntrepreneur;
+      'api::faq.faq': ApiFaqFaq;
+      'api::language.language': ApiLanguageLanguage;
+      'api::menu-footer.menu-footer': ApiMenuFooterMenuFooter;
+      'api::menu-navbar.menu-navbar': ApiMenuNavbarMenuNavbar;
+      'api::note.note': ApiNoteNote;
+      'api::promotion.promotion': ApiPromotionPromotion;
       'api::review.review': ApiReviewReview;
+      'api::social-media.social-media': ApiSocialMediaSocialMedia;
       'api::store.store': ApiStoreStore;
       'api::store-category.store-category': ApiStoreCategoryStoreCategory;
     }
