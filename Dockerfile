@@ -1,23 +1,13 @@
-FROM node:18.19-alpine
+FROM node:18.19-bullseye-slim
 
 # Installing dependencies for sharp and node-gyp
-RUN apk update && apk add --no-cache \
-    build-base \
-    gcc \
-    g++ \
-    autoconf \
-    automake \
-    zlib-dev \
-    libpng-dev \
-    nasm \
-    bash \
-    vips \
-    python3 \
-    py3-pip \
-    make
-
-# Instalar sharp manualmente para el entorno musl
-RUN npm install --platform=linuxmusl --arch=x64 sharp
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libcairo2-dev \
+    libjpeg-dev \
+    libpango1.0-dev \
+    libgif-dev \
+    librsvg2-dev
 
 # Setting up the working directory
 WORKDIR /opt/
