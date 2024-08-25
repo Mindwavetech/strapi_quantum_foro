@@ -16,17 +16,16 @@ RUN apk update && apk add --no-cache \
     py3-pip \
     make
 
+# Instalar sharp manualmente para el entorno musl
+RUN npm install --platform=linuxmusl --arch=x64 sharp
+
 # Setting up the working directory
 WORKDIR /opt/
 ENV PATH /opt/node_modules/.bin:$PATH
 
 # Copying dependency definitions and installing dependencies
 COPY ./package.json ./yarn.lock ./
-
-# Install project dependencies, including sharp with musl compatibility
-RUN yarn config set network-timeout 600000 -g && \
-    yarn install && \
-    yarn add sharp --platform=linuxmusl --arch=x64
+RUN yarn config set network-timeout 600000 -g && yarn install
 
 # Copy the rest of the application files
 WORKDIR /opt/app
