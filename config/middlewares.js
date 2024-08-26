@@ -8,10 +8,11 @@ module.exports = [
       enabled: true,
       headers: '*',
       origin: [
-      'http://localhost:1337',
-      'http://localhost:1336',
-      'http://localhost:3000',
-      'https://quantumforo.vercel.app'
+        'http://localhost:1337',
+        'http://localhost:1336',
+        'http://localhost:3000',
+        'https://quantumforo.vercel.app',
+        'https://strapi.devtest.wiki'
       ],
       contentSecurityPolicy: {
         useDefaults: true,
