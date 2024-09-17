@@ -4,7 +4,8 @@
   "info": {
     "singularName": "store-category",
     "pluralName": "store-categories",
-    "displayName": "StoreCategory"
+    "displayName": "StoreCategory",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -16,12 +17,6 @@
     },
     "Description": {
       "type": "string"
-    },
-    "store": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::store.store",
-      "inversedBy": "store_categories"
     }
   }
 }

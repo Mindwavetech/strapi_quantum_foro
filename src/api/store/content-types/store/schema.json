@@ -12,26 +12,20 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Name": {
+    "name": {
       "type": "string"
     },
-    "Url": {
+    "url": {
       "type": "string"
     },
-    "Description": {
+    "description": {
       "type": "string"
     },
-    "Location": {
+    "location": {
       "type": "string"
     },
     "coverageArea": {
       "type": "string"
-    },
-    "store_categories": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::store-category.store-category",
-      "mappedBy": "store"
     },
     "entrepreneur": {
       "type": "relation",
@@ -42,6 +36,12 @@
       "type": "string"
     },
     "backgroundColor": {
+      "type": "string"
+    },
+    "latitud": {
+      "type": "string"
+    },
+    "longitud": {
       "type": "string"
     }
   }

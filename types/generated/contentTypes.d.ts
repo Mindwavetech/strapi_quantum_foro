@@ -1102,13 +1102,14 @@ export interface ApiEntrepreneurEntrepreneur extends Schema.CollectionType {
       'oneToOne',
       'plugin::users-permissions.user'
     >;
-    Description: Attribute.String;
+    description: Attribute.String;
     businessType: Attribute.String;
     stores: Attribute.Relation<
       'api::entrepreneur.entrepreneur',
       'oneToOne',
       'api::store.store'
     >;
+    imgUrl: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1447,16 +1448,11 @@ export interface ApiStoreStore extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    Name: Attribute.String;
-    Url: Attribute.String;
-    Description: Attribute.String;
-    Location: Attribute.String;
+    name: Attribute.String;
+    url: Attribute.String;
+    description: Attribute.String;
+    location: Attribute.String;
     coverageArea: Attribute.String;
-    store_categories: Attribute.Relation<
-      'api::store.store',
-      'oneToMany',
-      'api::store-category.store-category'
-    >;
     entrepreneur: Attribute.Relation<
       'api::store.store',
       'oneToOne',
@@ -1464,6 +1460,8 @@ export interface ApiStoreStore extends Schema.CollectionType {
     >;
     imgUrl: Attribute.String;
     backgroundColor: Attribute.String;
+    latitud: Attribute.String;
+    longitud: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1488,6 +1486,7 @@ export interface ApiStoreCategoryStoreCategory extends Schema.CollectionType {
     singularName: 'store-category';
     pluralName: 'store-categories';
     displayName: 'StoreCategory';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1495,11 +1494,6 @@ export interface ApiStoreCategoryStoreCategory extends Schema.CollectionType {
   attributes: {
     Name: Attribute.String;
     Description: Attribute.String;
-    store: Attribute.Relation<
-      'api::store-category.store-category',
-      'manyToOne',
-      'api::store.store'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

@@ -11,6 +11,7 @@ module.exports = [
         'http://localhost:1337',
         'http://localhost:1336',
         'http://localhost:3000',
+        'http://localhost:3001',
         'https://quantumforo.vercel.app',
         'https://strapi.devtest.wiki'
       ],
