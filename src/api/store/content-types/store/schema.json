@@ -43,6 +43,11 @@
     },
     "longitud": {
       "type": "string"
+    },
+    "store_categories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::store-category.store-category"
     }
   }
 }

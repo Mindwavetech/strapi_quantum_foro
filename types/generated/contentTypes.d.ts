@@ -1462,6 +1462,11 @@ export interface ApiStoreStore extends Schema.CollectionType {
     backgroundColor: Attribute.String;
     latitud: Attribute.String;
     longitud: Attribute.String;
+    store_categories: Attribute.Relation<
+      'api::store.store',
+      'oneToMany',
+      'api::store-category.store-category'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
